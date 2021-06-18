@@ -164,7 +164,7 @@ func writeAndFilterOutput(readIn io.Reader, scanOut io.Writer, prependTime bool,
 		stringMatch := false
 
 		for _, filter := range filters {
-			if strings.Contains(scanIn.Text(), filter) {
+			if strings.Contains(scanIn.Text(), filter) || strings.Contains(scanIn.Text(), "ACL - SCHEMA") || strings.Contains(scanIn.Text(), "ACL _timescaledb_catalog")|| strings.Contains(scanIn.Text(), "timescaledb_fdw postgres") || strings.Contains(scanIn.Text(), "ACL _timescaledb_cache") || strings.Contains(scanIn.Text(), "ACL _timescaledb_config") || strings.Contains(scanIn.Text(), "ACL _timescaledb_internal") {
 				stringMatch = true
 				break
 			}
