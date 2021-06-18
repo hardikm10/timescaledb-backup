@@ -168,6 +168,11 @@ func writeAndFilterOutput(readIn io.Reader, scanOut io.Writer, prependTime bool,
 				stringMatch = true
 				break
 			}
+			
+			if strings.Contains(scanIn.Text(), "FROM postgres") {
+				stringMatch = true
+				break
+			}
 		}
 		if !stringMatch {
 			if prependTime {
