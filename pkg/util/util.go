@@ -165,14 +165,13 @@ func writeAndFilterOutput(readIn io.Reader, scanOut io.Writer, prependTime bool,
 
 		for _, filter := range filters {
 			if strings.Contains(scanIn.Text(), filter) || strings.Contains(scanIn.Text(), "ACL - SCHEMA") || strings.Contains(scanIn.Text(), "ACL _timescaledb_catalog")|| strings.Contains(scanIn.Text(), "timescaledb_fdw postgres") || strings.Contains(scanIn.Text(), "ACL _timescaledb_cache") || strings.Contains(scanIn.Text(), "ACL _timescaledb_config") || strings.Contains(scanIn.Text(), "ACL _timescaledb_internal") {
+				fmt.Println("Skipping the below line of TOC:")
+				fmt.Println(scanIn.Text())
 				stringMatch = true
 				break
 			}
 			
-			if strings.Contains(scanIn.Text(), "FROM postgres") {
-				stringMatch = true
-				break
-			}
+			
 		}
 		if !stringMatch {
 			if prependTime {
